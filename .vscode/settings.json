@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Tap The Match.sln"
+    "dotnet.defaultSolution": "tap-the-match.sln"
 }
