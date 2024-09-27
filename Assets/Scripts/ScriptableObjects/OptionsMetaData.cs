@@ -16,6 +16,10 @@ public class OptionsMetaData : ScriptableObject
         public Sprite image;
     }
 
+    public Sprite BG;
+    public Sprite selectedImage;
+    public Sprite wrongAnswerImage;
+
     public List<Option> options;
 
 }
