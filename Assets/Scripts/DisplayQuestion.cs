@@ -7,68 +7,64 @@ namespace TapTheMatch.Question
 {
     public class DisplayQuestion : MonoBehaviour
     {
-
-        const int OPTIONS_COUNT = 4;
-
+        private const int OPTIONS_COUNT = 4;
         public TitleCtrl titleCtrl;
         public OptionCtrl[] optionCtrls = new OptionCtrl[OPTIONS_COUNT];
         public OptionsMetaData colorsMetaData;
 
-
-        void Start()
+        private void Start()
         {
             DisplayQuestionData(colorsMetaData);
         }
 
         public void DisplayQuestionData(OptionsMetaData questionsData)
         {
-            List<Option> optionsData = questionsData.options.GetRandom(OPTIONS_COUNT);
-            List<string> optionsTitles = optionsData.Select(x => x.title).ToList();
+            var optionsData = questionsData.options.GetRandom(OPTIONS_COUNT);
+            var optionsTitles = optionsData.Select(x => x.title).ToList();
             optionsTitles.Shuffle();
 
-            int randomIndex = Random.Range(0, optionsData.Count);
-            int answerIndex = 0;
+            GetTitleData(optionsData, optionsTitles, out string questionTitle, out int answerIndex);
+            titleCtrl.SetOption(questionTitle, questionsData.titleBG);
 
-            string questionTitle;
-            if (UnityEngine.Random.Range(0, 2) == 0)
-            {
-                questionTitle = "Color\n" + optionsData[randomIndex].title;
-                answerIndex = randomIndex;
-            }
-            else
-            {
-                questionTitle = "Text\n" + optionsData[randomIndex].title;
-                answerIndex = optionsTitles.FindIndex(x => x == optionsData[randomIndex].title);
-            }
-
-            Debug.Log("Answer Index: " + answerIndex);
-
+            Debug.Log($"Answer Index: {answerIndex}");
             for (int i = 0; i < OPTIONS_COUNT; i++)
             {
-                Debug.Log("Option " + i + " : " + optionsTitles[i]);
+                int currentIndex = i;
+                Debug.Log($"Option {currentIndex} : {optionsTitles[currentIndex]}");
 
-                optionCtrls[i].SetOption(optionsTitles[i], optionsData[i].image, () =>
+                optionCtrls[currentIndex].SetOption(optionsTitles[currentIndex], optionsData[currentIndex].image, () =>
                 {
-                    int clickedOption = i;
-                    Debug.Log("Option " + clickedOption + " Clicked");
-
-                    if (clickedOption == answerIndex)
-                    {
-                        Debug.Log("Correct Answer");
-                    }
-                    else
-                    {
-                        Debug.Log("Wrong Answer");
-                    }
-
-                    CoroutineUtils.instance.WaitUntillGivenTime(1f, () =>
-                    {
-                        DisplayQuestionData(questionsData);
-                    });
+                    OnOptionSelection(answerIndex, currentIndex);
                 });
             }
 
-            titleCtrl.SetOption(questionTitle, questionsData.titleBG);
+        }
+
+        private void OnOptionSelection(int answerIndex, int selectedIndex)
+        {
+            Debug.Log($"Option {selectedIndex} Clicked");
+
+            if (selectedIndex == answerIndex)
+            {
+                Debug.Log("Correct Answer");
+            }
+            else
+            {
+                Debug.Log("Wrong Answer");
+            }
+
+            CoroutineUtils.instance.WaitUntillGivenTime(1f, () =>
+            {
+                DisplayQuestionData(colorsMetaData);
+            });
+        }
+
+        private void GetTitleData(List<Option> optionsData, List<string> optionsTitles, out string questionTitle, out int answerIndex)
+        {
+            int randomIndex = Random.Range(0, optionsData.Count);
+            bool isColorQuestion = Random.Range(0, 2) == 0;
+            questionTitle = isColorQuestion ? $"Color\n{optionsData[randomIndex].title}" : $"Text\n{optionsData[randomIndex].title}";
+            answerIndex = isColorQuestion ? randomIndex : optionsTitles.IndexOf(optionsData[randomIndex].title);
         }
     }
 }
