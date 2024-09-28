@@ -15,14 +15,20 @@ MonoBehaviour:
   BG: {fileID: 21300000, guid: 66aff4e6c6c214581a4d6d2c7b7db8b1, type: 3}
   selectedImage: {fileID: 21300000, guid: 4b22bc277f11d4866bd804018dd92280, type: 3}
   wrongAnswerImage: {fileID: 21300000, guid: 3f8ecb248f5a24188b0f8f9ceaa2a179, type: 3}
+  titleBG: {fileID: 21300000, guid: 7ab89dd39fc164487a44d9103c1c6939, type: 3}
   options:
-  - title: Blue
+  - id: 
+    title: Blue
     image: {fileID: 21300000, guid: 8b8bccbd5b5a3465cb53dda290e812fb, type: 3}
-  - title: Green
+  - id: 
+    title: Green
     image: {fileID: 21300000, guid: 5d5c3735602654c6196dfec76364aacf, type: 3}
-  - title: Orange
+  - id: 
+    title: Orange
     image: {fileID: 21300000, guid: d2132e98e3b0540ea8f8fd44278eca24, type: 3}
-  - title: Red
+  - id: 
+    title: Red
     image: {fileID: 21300000, guid: 08b4f33b70d284fc9b41d75d075a98fa, type: 3}
-  - title: Yellow
+  - id: 
+    title: Yellow
     image: {fileID: 21300000, guid: b3b20ec64a9514a079fbf151ecc7cdc6, type: 3}

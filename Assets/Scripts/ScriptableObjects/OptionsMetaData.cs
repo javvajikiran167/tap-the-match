@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-[CreateAssetMenu(fileName = "OptionsMetaData", menuName = "ScriptableObjects/OptionsMetaData", order = 1)]
-public class OptionsMetaData : ScriptableObject
+namespace TapTheMatch
 {
-
-
     [Serializable]
     public struct Option
     {
+        public string id;
         public string title;
         public Sprite image;
     }
 
-    public Sprite BG;
-    public Sprite selectedImage;
-    public Sprite wrongAnswerImage;
+    [CreateAssetMenu(fileName = "OptionsMetaData", menuName = "ScriptableObjects/OptionsMetaData", order = 1)]
+    public class OptionsMetaData : ScriptableObject
+    {
 
-    public List<Option> options;
 
+
+
+        public Sprite BG;
+        public Sprite selectedImage;
+        public Sprite wrongAnswerImage;
+        public Sprite titleBG;
+
+        public List<Option> options;
+
+    }
 }
+

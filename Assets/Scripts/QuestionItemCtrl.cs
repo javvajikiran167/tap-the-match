@@ -1,29 +1,19 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TapTheMatch
+namespace TapTheMatch.Question
 {
-    public struct Question
-    {
-        public string title;
-        public Sprite image;
-    }
 
     [RequireComponent(typeof(Button))]
-    public class QuestionItemCtrl : MonoBehaviour
+    public class OptionCtrl : TitleCtrl
     {
-        public Image image;
-        public TextMeshProUGUI title;
         private Button button;
 
-
-        public void SetQuestionItem(Question question, Action onClick)
+        public void SetOption(string title, Sprite image, Action onClick)
         {
             SetButtonClick(onClick);
-            SetTitle(question.title);
-            SetImage(question.image);
+            base.SetOption(title, image);
         }
 
         private void SetButtonClick(Action onClick)
@@ -34,44 +24,12 @@ namespace TapTheMatch
             }
 
             button.onClick.RemoveAllListeners();
+
+            if (onClick == null)
+            {
+                return;
+            }
             button.onClick.AddListener(() => onClick());
-        }
-
-        private void SetTitle(string title)
-        {
-            if (this.title == null)
-            {
-                Debug.Log("Question text go is not set");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(title))
-            {
-                this.title.gameObject.SetActive(false);
-                return;
-            }
-
-            this.title.text = title;
-            this.title.gameObject.SetActive(true);
-
-        }
-
-        private void SetImage(Sprite image)
-        {
-            if (this.image == null)
-            {
-                Debug.Log("Question image go is not set");
-                return;
-            }
-
-            if (image == null)
-            {
-                this.image.gameObject.SetActive(false);
-                return;
-            }
-
-            this.image.sprite = image;
-            this.image.gameObject.SetActive(true);
         }
     }
 }
