@@ -1,23 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Custom.Utils;
 using UnityEngine;
+
 
 namespace TapTheMatch.Question
 {
-    public class DisplayQuestion : MonoBehaviour
+    public class QuestionCtrl : MonoBehaviour
     {
         private const int OPTIONS_COUNT = 4;
         public TitleCtrl titleCtrl;
         public OptionCtrl[] optionCtrls = new OptionCtrl[OPTIONS_COUNT];
         public OptionsMetaData colorsMetaData;
 
-        private void Start()
-        {
-            DisplayQuestionData(colorsMetaData);
-        }
-
-        public void DisplayQuestionData(OptionsMetaData questionsData)
+        public void SetQuestion(OptionsMetaData questionsData, Action<bool> OnAnsweringAQuestion)
         {
             var optionsData = questionsData.options.GetRandom(OPTIONS_COUNT);
             var optionsTitles = optionsData.Select(x => x.title).ToList();
@@ -34,35 +30,16 @@ namespace TapTheMatch.Question
 
                 optionCtrls[currentIndex].SetOption(optionsTitles[currentIndex], optionsData[currentIndex].image, () =>
                 {
-                    OnOptionSelection(answerIndex, currentIndex);
+                    OnAnsweringAQuestion(answerIndex == currentIndex);
                 });
             }
-
         }
 
-        private void OnOptionSelection(int answerIndex, int selectedIndex)
-        {
-            Debug.Log($"Option {selectedIndex} Clicked");
-
-            if (selectedIndex == answerIndex)
-            {
-                Debug.Log("Correct Answer");
-            }
-            else
-            {
-                Debug.Log("Wrong Answer");
-            }
-
-            CoroutineUtils.instance.WaitUntillGivenTime(1f, () =>
-            {
-                DisplayQuestionData(colorsMetaData);
-            });
-        }
 
         private void GetTitleData(List<Option> optionsData, List<string> optionsTitles, out string questionTitle, out int answerIndex)
         {
-            int randomIndex = Random.Range(0, optionsData.Count);
-            bool isColorQuestion = Random.Range(0, 2) == 0;
+            int randomIndex = UnityEngine.Random.Range(0, optionsData.Count);
+            bool isColorQuestion = UnityEngine.Random.Range(0, 2) == 0;
             questionTitle = isColorQuestion ? $"Color\n{optionsData[randomIndex].title}" : $"Text\n{optionsData[randomIndex].title}";
             answerIndex = isColorQuestion ? randomIndex : optionsTitles.IndexOf(optionsData[randomIndex].title);
         }
