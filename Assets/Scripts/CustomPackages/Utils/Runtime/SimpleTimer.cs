@@ -3,7 +3,7 @@ using System;
 
 namespace Custom.Utils.Timer
 {
-    public class SimpleTimer
+	public class SimpleTimer
 	{
 		public float life { get { return _life; } private set { _life = value; } }
 		public float elapsed { get { return _curTime; } }
@@ -18,7 +18,7 @@ namespace Custom.Utils.Timer
 		protected float _startTime;
 		protected float _pauseTime;
 		protected float _curTime { get { return (isPaused ? _pauseTime : _getTime) - _startTime; } set { _pauseTime = value; } }
-		protected float _getTime { get { return _fixedTime ? Time.fixedTime : Time.time; } }
+		protected float _getTime { get { return _fixedTime ? Time.fixedTime : Time.realtimeSinceStartup; } }
 
 
 		private Coroutine _everyFrameCorotuine;
@@ -33,11 +33,11 @@ namespace Custom.Utils.Timer
 		/// </summary>
 		/// <param name="lifeSpan">length of the timer</param>
 		/// <param name="useFixedTime">use fixed (physics) time or screen update time</param>
-		private SimpleTimer(float lifeSpan, bool useFixedTime = false) 
-		{ 
+		private SimpleTimer(float lifeSpan, bool useFixedTime = false)
+		{
 			life = lifeSpan;
-			_fixedTime = useFixedTime; 
-			_startTime = _getTime; 
+			_fixedTime = useFixedTime;
+			_startTime = _getTime;
 		}
 
 		/// <summary>
@@ -84,17 +84,17 @@ namespace Custom.Utils.Timer
 		}
 
 		private void StartTimerCorotuines(Action<SimpleTimer> onTimerUpdated, Action onTimerCompletion)
-        {
+		{
 			if (onTimerUpdated != null)
 			{
-				_everyFrameCorotuine = CoroutineUtils.instance.CallEveryFrame(() => onTimerUpdated(this));
+				_everyFrameCorotuine = CoroutineUtils.Instance.CallEveryFrame(() => onTimerUpdated(this));
 			}
 
-			_timerCompletionCorotuine = CoroutineUtils.instance.WaitUntillContionIsMet(
+			_timerCompletionCorotuine = CoroutineUtils.Instance.WaitUntilConditionIsMet(
 			   () => this.isFinished,
 			   () =>
 			   {
-				   CoroutineUtils.instance.StopCorotuineCustom(_everyFrameCorotuine);
+				   CoroutineUtils.Instance.StopCoroutineCustom(_everyFrameCorotuine);
 				   onTimerCompletion?.Invoke();
 			   });
 		}
@@ -103,8 +103,8 @@ namespace Custom.Utils.Timer
 		{
 			Stop();
 
-			CoroutineUtils.instance.StopCorotuineCustom(_everyFrameCorotuine);
-			CoroutineUtils.instance.StopCorotuineCustom(_timerCompletionCorotuine);
+			CoroutineUtils.Instance.StopCoroutineCustom(_everyFrameCorotuine);
+			CoroutineUtils.Instance.StopCoroutineCustom(_timerCompletionCorotuine);
 		}
 	}
 }

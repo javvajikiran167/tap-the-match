@@ -22,13 +22,13 @@ namespace Custom.Services.Network.RestAPI
         public void MakeAPI<ResObj>(IAPIHeaders apiData, IAPICtrl<ResObj> apiCtrl)
         {
             Debug.Log("Making API: " + apiData.GetEndPoint());
-            _requestCorotuine  = CoroutineUtils.instance.StartCoroutine(Request(apiCtrl, null, apiData));
+            _requestCorotuine = CoroutineUtils.Instance.StartCoroutine(Request(apiCtrl, null, apiData));
         }
 
         public void MakeAPI<ResObj>(IAPIHeaders apiData, IAPICtrl<ResObj> apiCtrl, IAPIRetry apiRetry)
         {
             Debug.Log("Making API: " + apiData.GetEndPoint());
-            _requestCorotuine = CoroutineUtils.instance.StartCoroutine(Request(apiCtrl, apiRetry, apiData));
+            _requestCorotuine = CoroutineUtils.Instance.StartCoroutine(Request(apiCtrl, apiRetry, apiData));
         }
 
         public void AbortIfInProgress()
@@ -36,7 +36,7 @@ namespace Custom.Services.Network.RestAPI
             try
             {
                 if (_requestCorotuine != null)
-                    CoroutineUtils.instance.StopCoroutine(_requestCorotuine);
+                    CoroutineUtils.Instance.StopCoroutine(_requestCorotuine);
 
                 LogUtils.Log("Abort API called");
                 if (request != null)

@@ -17,14 +17,10 @@ namespace TapTheMatch
     public class OptionsMetaData : ScriptableObject
     {
 
-
-
-
         public Sprite BG;
-        public Sprite selectedImage;
+        public Sprite optionSelectedHighlightImage;
         public Sprite wrongAnswerImage;
         public Sprite titleBG;
-
         public List<Option> options;
 
     }

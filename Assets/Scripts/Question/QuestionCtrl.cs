@@ -11,16 +11,35 @@ namespace TapTheMatch.Question
         private const int OPTIONS_COUNT = 4;
         public TitleCtrl titleCtrl;
         public OptionCtrl[] optionCtrls = new OptionCtrl[OPTIONS_COUNT];
-        public OptionsMetaData colorsMetaData;
 
-        public void SetQuestion(OptionsMetaData questionsData, Action<bool> OnAnsweringAQuestion)
+        private OptionsMetaData questionsMetaData;
+        private Action<bool> onAnsweringAQuestion;
+
+        internal void Init(OptionsMetaData optionsMetaData, Action<bool> answerCallback, Sprite optionSelectedHighlightSprite)
         {
-            var optionsData = questionsData.options.GetRandom(OPTIONS_COUNT);
+            this.questionsMetaData = optionsMetaData;
+            this.onAnsweringAQuestion = answerCallback;
+
+            for (int i = 0; i < OPTIONS_COUNT; i++)
+            {
+                optionCtrls[i].Init(optionSelectedHighlightSprite);
+            }
+        }
+
+
+        internal void NextQuestion()
+        {
+            SetQuestion();
+        }
+
+        public void SetQuestion()
+        {
+            var optionsData = questionsMetaData.options.GetRandom(OPTIONS_COUNT);
             var optionsTitles = optionsData.Select(x => x.title).ToList();
             optionsTitles.Shuffle();
 
             GetTitleData(optionsData, optionsTitles, out string questionTitle, out int answerIndex);
-            titleCtrl.SetOption(questionTitle, questionsData.titleBG);
+            titleCtrl.SetOption(questionTitle, questionsMetaData.titleBG);
 
             Debug.Log($"Answer Index: {answerIndex}");
             for (int i = 0; i < OPTIONS_COUNT; i++)
@@ -30,11 +49,10 @@ namespace TapTheMatch.Question
 
                 optionCtrls[currentIndex].SetOption(optionsTitles[currentIndex], optionsData[currentIndex].image, () =>
                 {
-                    OnAnsweringAQuestion(answerIndex == currentIndex);
+                    onAnsweringAQuestion(answerIndex == currentIndex);
                 });
             }
         }
-
 
         private void GetTitleData(List<Option> optionsData, List<string> optionsTitles, out string questionTitle, out int answerIndex)
         {

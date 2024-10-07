@@ -38,7 +38,7 @@ namespace Custom.Utils
                 yield break;
             }
             Debug.Log("AssetBundle Load Success");
-            CoroutineUtils.instance.StartCoroutine(LoadSceneAsync(myLoadedAssetBundle, loadProgress));
+            CoroutineUtils.Instance.StartCoroutine(LoadSceneAsync(myLoadedAssetBundle, loadProgress));
         }
 
         private IEnumerator LoadSceneAsync(UnityEngine.AssetBundle bundle, Action<float> loadProgress)
@@ -52,7 +52,7 @@ namespace Custom.Utils
                 asyncOperation.allowSceneActivation = false;
                 while (!asyncOperation.isDone)
                 {
-                    loadProgress?.Invoke(0.5f + asyncOperation.progress/2);
+                    loadProgress?.Invoke(0.5f + asyncOperation.progress / 2);
                     yield return null;
                     if (asyncOperation.progress >= 0.9f)
                         break;

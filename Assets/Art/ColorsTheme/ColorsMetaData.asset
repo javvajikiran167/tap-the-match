@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ColorsMetaData
   m_EditorClassIdentifier: 
   BG: {fileID: 21300000, guid: 66aff4e6c6c214581a4d6d2c7b7db8b1, type: 3}
-  selectedImage: {fileID: 21300000, guid: 4b22bc277f11d4866bd804018dd92280, type: 3}
-  wrongAnswerImage: {fileID: 21300000, guid: 3f8ecb248f5a24188b0f8f9ceaa2a179, type: 3}
+  optionSelectedHighlightImage: {fileID: 21300000, guid: 4b22bc277f11d4866bd804018dd92280, type: 3}
+  wrongAnswerImage: {fileID: 21300000, guid: e9e61061cc6f04abaa1cb528855c9b5f, type: 3}
   titleBG: {fileID: 21300000, guid: 7ab89dd39fc164487a44d9103c1c6939, type: 3}
   options:
   - id: 

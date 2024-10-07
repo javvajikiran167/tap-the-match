@@ -9,9 +9,17 @@ namespace TapTheMatch.Question
     public class OptionCtrl : TitleCtrl
     {
         private Button button;
+        public Image selectedHighlightImage;
+
+        public void Init(Sprite selectedHighlightSprite)
+        {
+            selectedHighlightImage.sprite = selectedHighlightSprite;
+            selectedHighlightImage.gameObject.SetActive(false);
+        }
 
         public void SetOption(string title, Sprite image, Action onClick)
         {
+            selectedHighlightImage.gameObject.SetActive(false);
             SetButtonClick(onClick);
             base.SetOption(title, image);
         }
@@ -23,13 +31,17 @@ namespace TapTheMatch.Question
                 button = this.gameObject.GetComponent<Button>();
             }
 
-            button.onClick.RemoveAllListeners();
-
             if (onClick == null)
             {
                 return;
             }
-            button.onClick.AddListener(() => onClick());
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() =>
+            {
+                selectedHighlightImage.gameObject.SetActive(true);
+                onClick();
+            });
         }
     }
 }

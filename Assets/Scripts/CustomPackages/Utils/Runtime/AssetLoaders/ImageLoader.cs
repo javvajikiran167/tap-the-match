@@ -31,8 +31,9 @@ namespace Custom.Utils
                 return;
             }
 
-            CoroutineUtils.instance.StartCoroutine(DownloadAndAttachImage(imageUrl, imageComponent, defaultSprite));
+            CoroutineUtils.Instance.StartCoroutine(DownloadAndAttachImage(imageUrl, imageComponent, defaultSprite));
         }
+
         static IEnumerator DownloadAndAttachImage(string imageUrl, Image imageComponent, Sprite defaultSprite)
         {
             UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl);
