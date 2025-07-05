@@ -76,7 +76,6 @@ namespace Custom.Utils.Timer
 
 		public void StartTimerWithOffset(float lifeSpan, float remainingTime, Action<SimpleTimer> onTimerUpdated, Action onTimerCompletion)
 		{
-			LogUtils.Log("called: StartTimerWithOffset with lifeSpan, remainingTime: ", lifeSpan.ToString(), remainingTime.ToString());
 			life = lifeSpan;
 			_startTime = _getTime - (lifeSpan - remainingTime);
 			StartTimerCorotuines(onTimerUpdated, onTimerCompletion);
