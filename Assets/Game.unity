@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716189456}
     m_Modifications:
+    - target: {fileID: 2276502453160413017, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343435859220301987, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
       propertyPath: m_Name
       value: Option_2
@@ -406,6 +410,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716189456}
     m_Modifications:
+    - target: {fileID: 2276502453160413017, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343435859220301987, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
       propertyPath: m_Name
       value: Option_4
@@ -807,6 +815,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716189456}
     m_Modifications:
+    - target: {fileID: 2276502453160413017, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343435859220301987, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
       propertyPath: m_Name
       value: Option_3
@@ -1525,7 +1537,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 4b22bc277f11d4866bd804018dd92280, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2007,6 +2019,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716189456}
     m_Modifications:
+    - target: {fileID: 2276502453160413017, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343435859220301987, guid: 2c6b772047c134845b493be9f5dfd635, type: 3}
       propertyPath: m_Name
       value: Option_1
@@ -2171,7 +2187,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9444bdd00f2f443be974f21f79061f51, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2249,7 +2265,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 66aff4e6c6c214581a4d6d2c7b7db8b1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2596,7 +2612,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: a9f9e5484623c46bfbdb6b7de2566c7c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
