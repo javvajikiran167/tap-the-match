@@ -11,6 +11,7 @@ namespace TapTheMatch
         public GameObject wrongAnswerGo;
         public GameObject playAgainUIGo;
         public TextMeshProUGUI scoreText;
+        public TextMeshProUGUI highScoreText;
         public CustomButton restartBtn;
         public CustomButton exitBtn;
 
@@ -35,6 +36,14 @@ namespace TapTheMatch
         {
             playAgainUIGo.SetActive(true);
 
+            int highScore = PlayerPrefs.GetInt("HighScore");
+            if (score > highScore)
+            {
+                highScore = score;
+                PlayerPrefs.SetInt("HighScore", highScore);
+            }
+
+            highScoreText.text = $"High Score: {highScore}";
             scoreText.text = $"Score: {score}";
 
             restartBtn.RemoveAllAndAddListener(restartCallback);
