@@ -20,7 +20,7 @@ namespace TapTheMatch
 
         private void Start()
         {
-            if (PlayerPrefs.GetInt("FirstTime1", 0) == 0)
+            if (PlayerPrefs.GetInt("FirstTime", 0) == 0)
             {
                 Debug.Log("First Time");
                 PlayerPrefs.SetInt("FirstTime", 1);

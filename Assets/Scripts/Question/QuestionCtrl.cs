@@ -35,19 +35,19 @@ namespace TapTheMatch.Question
         public void SetQuestion()
         {
             var optionsData = questionsMetaData.options.GetRandom(OPTIONS_COUNT);
-            var optionsTitles = optionsData.Select(x => x.title).ToList();
-            optionsTitles.Shuffle();
+            var shuffledOptionsData = new List<Option>(optionsData);
+            shuffledOptionsData.Shuffle();
 
-            GetTitleData(optionsData, optionsTitles, out string questionTitle, out int answerIndex);
+            GetTitleData(optionsData, shuffledOptionsData.Select(x => x.title).ToList(), out string questionTitle, out int answerIndex);
             titleCtrl.SetOption(questionTitle, questionsMetaData.titleBG);
 
             Debug.Log($"Answer Index: {answerIndex}");
             for (int i = 0; i < OPTIONS_COUNT; i++)
             {
                 int currentIndex = i;
-                Debug.Log($"Option {currentIndex} : {optionsTitles[currentIndex]}");
+                Debug.Log($"Option {currentIndex} : {shuffledOptionsData[currentIndex].title}");
 
-                optionCtrls[currentIndex].SetOption(optionsTitles[currentIndex], optionsData[currentIndex].image, () =>
+                optionCtrls[currentIndex].SetOption(shuffledOptionsData[currentIndex].title, shuffledOptionsData[currentIndex].image, () =>
                 {
                     onAnsweringAQuestion(answerIndex == currentIndex);
                 });
