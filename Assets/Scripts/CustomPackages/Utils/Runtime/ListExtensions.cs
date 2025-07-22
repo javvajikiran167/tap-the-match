@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 static class ListExtensions
 {
+    private static readonly System.Random rnd = new System.Random();
+    
     public static void Shuffle<T>(this IList<T> list)
     {
-        System.Random rnd = new System.Random();
         int n = list.Count;
         while (n > 1)
         {
